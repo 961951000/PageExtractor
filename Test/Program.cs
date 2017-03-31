@@ -91,8 +91,8 @@ namespace Test
         /// <param name="urls">链接列表</param>
         /// <param name="depth">深度</param>
         /// <param name="baseUrl">根目录</param>
-        /// <param name="unload"></param>
-        /// <param name="loaded"></param>
+        /// <param name="unload">卸载</param>
+        /// <param name="loaded">加载</param>
         private static void AddUrls(string[] urls, int depth, string baseUrl, Dictionary<string, int> unload, Dictionary<string, int> loaded)
         {
             foreach (string url in urls)

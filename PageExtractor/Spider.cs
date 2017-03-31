@@ -352,8 +352,7 @@ namespace PageExtractor
                 req.UserAgent = _userAgent; //用户代理
                 RequestState rs = new RequestState(req, url, depth, index);
                 var result = req.BeginGetResponse(new AsyncCallback(ReceivedResource), rs);
-                ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle,
-                        TimeoutCallback, rs, _maxTime, true);
+                ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, TimeoutCallback, rs, _maxTime, true);
             }
             catch (WebException we)
             {
@@ -428,15 +427,13 @@ namespace PageExtractor
                     StreamReader reader = new StreamReader(ms, _encoding);
                     string str = reader.ReadToEnd();
                     rs.Html.Append(str);
-                    var result = resStream.BeginRead(rs.Data, 0, rs.BufferSize,
-                        new AsyncCallback(ReceivedData), rs);
+                    var result = resStream.BeginRead(rs.Data, 0, rs.BufferSize, new AsyncCallback(ReceivedData), rs);
                     return;
                 }
                 html = rs.Html.ToString();
                 SaveContents(html, url);
                 string[] links = GetLinks(html);
                 AddUrls(links, depth + 1);
-
                 _reqsBusy[index] = false;
                 DispatchWork();
             }
