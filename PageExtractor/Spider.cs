@@ -324,7 +324,10 @@ namespace PageExtractor
             _workingSignals = new WorkingUnitCollection(_reqCount);
             _stop = false;
         }
-
+        /// <summary>
+        /// 请求资源
+        /// </summary>
+        /// <param name="index"></param>
         private void RequestResource(int index)
         {
             int depth;
@@ -359,7 +362,10 @@ namespace PageExtractor
                 MessageBox.Show("RequestResource " + we.Message + url + we.Status);
             }
         }
-
+        /// <summary>
+        /// 获得资源
+        /// </summary>
+        /// <param name="ar"></param>
         private void ReceivedResource(IAsyncResult ar)
         {
             RequestState rs = (RequestState)ar.AsyncState;
@@ -452,10 +458,7 @@ namespace PageExtractor
             if (timedOut)
             {
                 RequestState rs = state as RequestState;
-                if (rs != null)
-                {
-                    rs.Req.Abort();
-                }
+                rs?.Req.Abort();
                 _reqsBusy[rs.Index] = false;
                 DispatchWork();
             }

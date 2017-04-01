@@ -32,7 +32,7 @@
                 <Button Content="..." Grid.Row="0" Grid.Column="2" Click="PropertyButton_Click" Margin="5,5"/>
                 <TextBlock Text="File Path" Grid.Row="1" Grid.Column="0"/>
                 <TextBox x:Name="TextPath" Grid.Row="1" Grid.Column="1"/>
-                <Button Content="..." Grid.Row="1" Grid.Column="2" Click="FolderButton_Click" Margin="5,5"/>
+                <Button Content="..." Grid.Row="1" Grid.Column="2" Click="FolderButton_Click" Margin="5"/>
             </Grid>
         </Border>        
         <ListView x:Name="ListDownload" Margin="5,20" Padding="5" Grid.Row="1">

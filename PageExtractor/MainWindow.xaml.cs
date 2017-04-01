@@ -57,7 +57,9 @@ namespace PageExtractor
         {
             _spider.Abort();
         }
-
+        /// <summary>
+        /// 下载按钮
+        /// </summary>
         private void btnDownload_Click(object sender, RoutedEventArgs e)
         {
             _spider.RootUrl = TextUrl.Text;
@@ -81,7 +83,9 @@ namespace PageExtractor
             };
             Dispatcher.Invoke(h, path, url);
         }
-
+        /// <summary>
+        /// 结束按钮
+        /// </summary>
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
             _spider.Abort();
@@ -89,12 +93,18 @@ namespace PageExtractor
             btnDownload.Content = "Download";
             btnStop.IsEnabled = false;
         }
-
+        /// <summary>
+        /// 文件夹按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FolderButton_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.FolderBrowserDialog fdlg = new System.Windows.Forms.FolderBrowserDialog();
-            fdlg.RootFolder = Environment.SpecialFolder.Desktop;
-            fdlg.Description = "Contents Root Folder";
+            System.Windows.Forms.FolderBrowserDialog fdlg = new System.Windows.Forms.FolderBrowserDialog
+            {
+                RootFolder = Environment.SpecialFolder.Desktop,
+                Description = @"Contents Root Folder"
+            };
             var result = fdlg.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
