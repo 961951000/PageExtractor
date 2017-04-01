@@ -94,7 +94,7 @@ namespace PageExtractor
                     {
                         break;
                     }
-                    Thread.Sleep(10000);
+                    Thread.Sleep(1000);
                 }
                 //WaitHandle.WaitAll(_works);
             }
@@ -318,7 +318,7 @@ namespace PageExtractor
         {
             _urlsLoaded.Clear();
             _urlsUnload.Clear();
-            AddUrls(new string[1] { RootUrl }, 0);
+            AddUrls(new[] { RootUrl }, 0);
             _index = 0;
             _reqsBusy = new bool[_reqCount];
             _workingSignals = new WorkingUnitCollection(_reqCount);
@@ -327,13 +327,12 @@ namespace PageExtractor
         /// <summary>
         /// 请求资源
         /// </summary>
-        /// <param name="index"></param>
         private void RequestResource(int index)
         {
-            int depth;
             string url = "";
             try
             {
+                int depth;
                 lock (_locker)
                 {
                     if (_urlsUnload.Count <= 0)
@@ -449,7 +448,7 @@ namespace PageExtractor
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.GetType().ToString() + e.Message);
+                MessageBox.Show(e.GetType() + e.Message);
             }
         }
 
@@ -459,7 +458,10 @@ namespace PageExtractor
             {
                 RequestState rs = state as RequestState;
                 rs?.Req.Abort();
-                _reqsBusy[rs.Index] = false;
+                if (rs != null)
+                {
+                    _reqsBusy[rs.Index] = false;
+                }
                 DispatchWork();
             }
         }
@@ -491,9 +493,7 @@ namespace PageExtractor
             {
                 return false;
             }
-            if (url.Contains(".jpg") || url.Contains(".gif")
-                || url.Contains(".png") || url.Contains(".css")
-                || url.Contains(".js"))
+            if (url.Contains(".jpg") || url.Contains(".gif")|| url.Contains(".png") || url.Contains(".css") || url.Contains(".js"))
             {
                 return false;
             }
